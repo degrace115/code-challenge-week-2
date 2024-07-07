@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping List</title>
+  <style>
+    .purchased {
+      text-decoration: line-through;
+      background-color: lightgray;
+    }
+  </style>
+</head>
+<body>
+  <h1>Shopping List</h1>
+
+  <input type="text" id="itemInput">
+  <button id="addButton">Add</button>
+
+  <ul id="itemList"></ul>
+
+  <button id="markPurchasedButton">Mark Purchased</button>
+  <button id="clearListButton">Clear List</button>
+
+  <script>
+    // Get the necessary elements
+    var itemInput = document.getElementById("itemInput");
+    var addButton = document.getElementById("addButton");
+    var itemList = document.getElementById("itemList");
+    var markPurchasedButton = document.getElementById("markPurchasedButton");
+    var clearListButton = document.getElementById("clearListButton");
+
+    // Event listener for "Add" button
+    addButton.addEventListener("click", function() {
+      var newItemText = itemInput.value;
+      var newItem = document.createElement("li");
+      newItem.innerText = newItemText;
+      itemList.appendChild(newItem);
+      itemInput.value = "";
+    });
+
+    // Event listener for "Mark Purchased" button
+    markPurchasedButton.addEventListener("click", function() {
+      var items = document.getElementsByTagName("li");
+      for (var i = 0; i < items.length; i++) {
+        items[i].classList.toggle("purchased");
+      }
+    });
+
+    // Event listener for list items
+    itemList.addEventListener("click", function(event) {
+      var clickedItem = event.target;
+      clickedItem.classList.toggle("purchased");
+    });
+
+    // Event listener for "Clear List" button
+    clearListButton.addEventListener("click", function() {
+      itemList.innerHTML = "";
+    });
+  </script>
+</body>
+</html>
